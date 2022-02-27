@@ -1,0 +1,140 @@
+<!-- CMSC 437 Project Group 10 [Judy David, Sriniti Jayaram, James Weber] -->
+<!-- Devices page for website -->
+<!-- Description: Devices page displays the vitals for selected patient -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+        <title> Devices </title>
+
+        <!-- The stylesheet used for the global settings of the website -->
+        <script src="script.js"></script>
+        <!-- The Javascript functions used througout the website -->
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+    <!-- Calls the loadDev function upon loading of page -->
+    <body onload="loadDev()">
+        
+        <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+            <!-- click logo to return to home page -->
+            <a class="navbar-brand" href="index.htm"><img src="home_logo.jpg" width="40" height="40"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                <!-- navbar tabs link to different webpages -->
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a href="index.htm"> Home </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="Patients.htm"> Patients </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="Devices.htm"> Devices </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <!-- title of site -->
+        <h1 style="text-align: center;">Devices</h1>
+        
+        <div class = "container-fluid">            
+            <div class="col-sm-12">
+                <div class = "container-fluid" style="border-style: solid; background-color: black;">
+                    
+                    <!-- displays the current patient name, dob, time and date -->
+                    <div class="row" style="border-bottom-style: solid; padding: 5px; background-color: lightcyan;">
+                        
+                        <div col="col-sm-8">
+                            <h1 id="patientNameDEV" style="color: red; font-size: 40px;">Please Select A Patient</h1>
+                        </div>
+                        <div col="col-sm-2"><br></div>
+                        <div col="col-sm-2" style="padding: 10px 0px 0px 100px;">
+                            <h2 id="basicDemographics"></h2>
+                        </div>                       
+                    </div>
+                    
+                    <!-- displays the vitals and levels pertaining to current selected patient -->
+                    <!-- updates frequently to simulate a working monitor display -->
+                    <div class="container-fluid" id="patientDevices">
+                        
+                        <div class="row"  style="padding: 20px;">
+                            <div class="col-6"> 
+                                <!-- displays where the waveforms would typically appear -->
+                                <div class="row">
+                                    <h2 style="color: white">ECG WAV</sub></h2></div>
+                                <div class="row"><img src="ecg.gif" width="500" height="100"></div>
+                                
+                                <div class="row">
+                                    <h2 style="color: white">RR WAV</h2></div>
+                                <div class="row"><img src="respiratoryRate.gif" width="500" height="100"></div>
+                                
+                                <div class="row">
+                                    <h2 style="color: white">CO<sub>2</sub></h2></div>
+                                    <div class="row"><img src="co2.gif" width="500" height="100"></div>
+                            </div>
+                            
+                            <!-- simulates the changing vitals -->                                           
+                            <div class="col-3" id="vitalBoxDEV">
+                                <div class="row" id="vbRow">
+                                    <h2 style="color: white;">HR</h2>
+                                    <h1 id="pulseLvl">&nbsp</h1>
+                                </div>
+
+                                <div class="row" id="vbRow">
+                                    <h2 style="color: white;">ECG</h2>
+                                    <h1 id="ecgLvl">&nbsp</h1>
+                                </div>
+
+                                    <div class="row" id="vbRow">
+                                    <h2 style="color: white;">SPO<sub>2</sub>%</h2>
+                                    <h1 id="spo2Lvl">&nbsp</h1>                                    
+                                </div>
+                            </div>
+
+                            <div class="col-3" id="vitalBoxDEV">
+                                <div class="row" id="vbRow">
+                                    <h2 style="color: white;">CO<sub>2</sub></h2>
+                                    <h1 id="co2Lvl">&nbsp</h1>
+                                </div>
+                               
+                                <div class="row" id="vbRow">
+                                    <h2 style="color: white;">BP</h2>
+                                    <h1 id="bPressureLvl">&nbsp</h1>
+                                </div>
+
+                                <div class="row" id="vbRow">
+                                    <h2 style="font-size: 28px; color: white;">EXTERNAL DEVICE</h2>
+                                    <h1 id="extDevice"><button id="extDevButton" onclick=updateExtDev(1)>&#8593;</button><button id="extDevButton" onclick=updateExtDev(-1)>&#8595;</button></h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row" style="text-align: center;">
+                    <div class="col-lg-12">
+                        <!-- button allowing xrays to be displayed -->
+                        <h2><b><button onclick="displayXRays()">View X-Rays</button></b></h2>
+                    </div>                        
+                </div>
+            </div>                  
+        </div>               
+        
+        <!-- this is where the xrays will be displayed, hidden until button is clicked -->
+        <div class="row" style="text-align: center;">
+            <div class="col-lg-12" id="xray" style="visibility: hidden;">  
+                <h1>X-Ray Diagram:</h1>
+                <img id="xrayIMG" width="300" height="300">
+            </div>
+        </div>    
+    </body>
+</html>
