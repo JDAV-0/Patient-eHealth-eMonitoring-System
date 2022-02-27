@@ -1,0 +1,87 @@
+<!-- CMSC 437 Project Group 10 [Judy David, Sriniti Jayaram, James Weber] -->
+<!-- Patient Info page for website -->
+<!-- Description: page contains navbar which links to various webpages and patient infomation -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+        <!-- The stylesheet used for the global settings of the website -->
+        <script src="script.js"></script>
+        <!-- The Javascript functions used througout the website -->
+        <link rel="stylesheet" href="style.css">
+        <title> Patient Profile </title>
+    </head>
+    <!-- Loads the patients dropdown list on page load -->
+    <body onload="firstLoad()">
+        <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+            <!-- click logo to return to home page -->
+            <a class="navbar-brand" href="index.htm"><img src="home_logo.jpg" width="40" height="40"></a>
+            <!-- Menu button that is shown when the navbar is collapsed, due to window resizing -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- The navbar items -->
+            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                <!-- navbar tabs link to different webpages -->
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a href="index.htm"> Home </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="Patients.htm"> Patients </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="Devices.htm"> Devices </a>
+                    </li>
+                </ul>
+              </div>
+        </nav>
+        <!-- The Patients page user section layout -->
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-4" style="padding: 5px">
+                    <div class="dropdown">
+                        <!-- When the user selects a patient the funciton is called to fill out the user information -->
+                        <select id="patient_list" name="Patients" onchange="updatePatient(this.value)">
+                        </select>
+                    </div> 
+                </div>
+                <div class="col-sm-8">
+                    <h1 style="text-align: left; font-family: Arial;"> Patient Profile: </h1>
+                </div>
+            </div>
+            <div class="row" style="background-color: beige;">
+                <div class="col-sm-1"></div>
+                <div class="col-sm-9">
+                    <div class="row" style="padding-top: 10px;">
+                        <div class="col-sm-2"><label>Name:</label></div>
+                        <div class="col-sm-10"><textarea rows="1" cols="50" name="patient_name" id="name_area"></textarea></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2"><label>Base Info:</label></div>
+                        <div class="col-sm-10"><textarea rows="3" cols="50" name="patient_info" id="info_area"></textarea></div>
+                    </div>
+                    <div class="row" style="padding-bottom: 10px;">
+                        <div class="col-sm-5" style="padding-left: 30px">
+                            <div class="row">Current Vitals:</div>
+                            <div class="row"><textarea rows="6" cols="25" name="patient_vitals" id="vitals_area"></textarea></div>
+                        </div>
+                        <div class="col-sm-7" style="padding-left: 30px">
+                            <div class="row">Patient Notes:</div>
+                            <div class="row"><textarea rows="4" cols="33" name="patient_notes"  id="patient_notes_area"></textarea></div>
+                            <!-- Saves the notes for the selected patients when the button is clicked -->
+                            <div class="row"><button onclick="save_notes()" >Save Notes</button></div>
+                        </div>
+                    </div>
+                </div>                
+                <div class="col-sm-3"></div>
+            </div>
+        </div>
+    </body>
+</html>
